@@ -18,7 +18,7 @@ socket.on("connect", () => {
 socket.on("tx", (data) => {
     const vout = data.vout;
 
-    let donation = null; // use for testing { address: "booya", value: Math.floor(Math.random() * 100000000) }
+    let donation = settings.testmode ? { address: "booya", value: Math.floor(Math.random() * 100000000) } : null;
 
     vout.forEach(element => {
         const value = element[address] || 0;
@@ -44,12 +44,14 @@ const displayNotification = (txInfo) => {
         case "sats":
             value = txInfo.value + " Satoshis";
             break;
+        default:
+            value = txInfo.value + " Satoshis";
     }
 
     notify.className = "show";
 
     amount.innerHTML = value;
-    audio.play();
+    settings.sound && audio.play();
 
     clearTimeout(timeout);
     timeout = setTimeout(() => {
