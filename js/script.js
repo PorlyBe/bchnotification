@@ -18,34 +18,34 @@ socket.on("connect", () => {
 socket.on("tx", (data) => {
     const vout = data.vout;
 
-    let donation = settings.testmode ? { address: "booya", value: Math.floor(Math.random() * 100000000) } : null;
+    let donation = settings.testmode ? Math.floor(Math.random() * 100000000) : null;
 
     vout.forEach(element => {
         const value = element[address] || 0;
-        if (value !== 0) donation = { address: Object.keys(element)[0], value };
+        if (value !== 0) donation = value;
 
     });
 
     if (donation !== null) displayNotification(donation);
 });
 
-const displayNotification = (txInfo) => {
+const displayNotification = (val) => {
 
     const unit = settings.units;
 
     let value = 0.00000000;
     switch (unit) {
         case "full":
-            value = (txInfo.value / 100000000).toFixed(8) + " BCH";
+            value = (val / 100000000).toFixed(8) + " BCH";
             break;
         case "bits":
-            value = txInfo.value / 100 + " BCH Bits";
+            value = val / 100 + " BCH Bits";
             break;
         case "sats":
-            value = txInfo.value + " Satoshis";
+            value = val + " Satoshis";
             break;
         default:
-            value = txInfo.value + " Satoshis";
+            value = val + " Satoshis";
     }
 
     notify.className = "show";
