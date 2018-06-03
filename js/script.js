@@ -8,6 +8,8 @@ const address = toLegacyAddress(settings.cashaddr);
 const audio = document.getElementById('sound');
 const amount = document.getElementById("amount");
 const notify = document.getElementById("notification");
+const message = document.getElementById("message");
+
 let timeout = null;
 
 socket.on("connect", () => {
@@ -62,6 +64,7 @@ const displayNotification = (val) => {
 }
 
 const init = () => {
+    message.innerHTML = settings.notification.message;
     notify.style.color = settings.notification.color;
     notify.style.fontFamily = settings.notification.font;
     notify.style.fontSize = settings.notification.size + 'px';

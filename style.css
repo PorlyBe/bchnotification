@@ -1,6 +1,11 @@
 .container{
   background: transparent;
-  text-align:center;
+  text-align: center;
+  
+}
+
+#notification{
+  transition: all 0.3s ease-out;
 }
 
 .hidden{

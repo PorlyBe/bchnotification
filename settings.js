@@ -15,6 +15,9 @@ const settings = {
     // notification settings
     notification: {
 
+        // donation message. leave blank if no message wanted
+        message: "",
+
         //duration in milisecons (aka 4000 = 4s)
         duration: 4000, 
         
